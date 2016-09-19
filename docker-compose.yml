@@ -1,0 +1,25 @@
+version: "2"
+services:
+    web:
+        extends:
+            file: ./services/web/nginx.yml
+            service: web
+        container_name: web
+        environment:
+            - NGINX_HOST=test.local
+            - NGINX_PORT=80
+        #        depends_on: db
+        #    app:
+        #        extends: ./services/app/php
+        #        container_name: app
+        #    db:
+        #        extends: ./services/db/mysql
+        #        container_name: db
+        #        valumes:
+        #            - "./.data/db:/var/lib/mysql"
+        #        environment:
+
+
+
+
+
