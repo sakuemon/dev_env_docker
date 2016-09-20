@@ -8,10 +8,8 @@ services:
         environment:
             NGINX_HOST: test.local
             NGINX_PORT: 80
-        #    app:
-        #        extends: ./services/app/php
-        #        container_name: app
- 
+        links:
+             - app
     db:
         extends:
             file: ./services/db/mysql.yml
@@ -23,9 +21,12 @@ services:
             MYSQL_ROOT_PASSWORD: password
             MYSQL_USER: s_user
             MYSQL_PASSEORD: password
-
-
-
-
+    app:
+        extends:
+            file: ./services/app/php.yml
+            service: app
+        container_name: app
+        links:
+             - db
 
 
