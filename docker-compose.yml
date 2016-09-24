@@ -9,14 +9,14 @@ services:
             NGINX_HOST: test.local
             NGINX_PORT: 80
         links:
-             - app
+            - app
+        depends_on:
+            - app
     db:
         extends:
             file: ./services/db/mysql.yml
             service: db
         container_name: db
-        volumes:
-            - .data/db:/var/lib/mysql
         environment:
             MYSQL_ROOT_PASSWORD: password
             MYSQL_USER: s_user
@@ -28,5 +28,6 @@ services:
         container_name: app
         links:
              - db
-
-
+volumes:
+    db:
+        driver: 'local'
