@@ -4,6 +4,3 @@ services:
         image: mysql
         volumes:
             - db:/var/lib/mysql
-volumes:
-    db:
-        driver: 'local'

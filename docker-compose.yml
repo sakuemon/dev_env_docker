@@ -2,32 +2,29 @@ version: "2"
 services:
     web:
         extends:
-            file: ./services/web/nginx.yml
+            file: ./web/nginx.yml
             service: web
         container_name: web
-        environment:
-            NGINX_HOST: test.local
-            NGINX_PORT: 80
         links:
             - app
         depends_on:
             - app
-    db:
-        extends:
-            file: ./services/db/mysql.yml
-            service: db
-        container_name: db
-        environment:
-            MYSQL_ROOT_PASSWORD: password
-            MYSQL_USER: s_user
-            MYSQL_PASSEORD: password
+              #    db:
+              #        extends:
+              #            file: ./db/mysql.yml
+              #            service: db
+              #        container_name: db
+              #        environment:
+              #            MYSQL_ROOT_PASSWORD: password
+              #            MYSQL_USER: s_user
+              #            MYSQL_PASSEORD: password
     app:
         extends:
-            file: ./services/app/php.yml
+            file: ./app/php.yml
             service: app
         container_name: app
-        links:
-             - db
+        #        links:
+        #     - db
 volumes:
     db:
         driver: 'local'
