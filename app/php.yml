@@ -2,3 +2,6 @@ version: "2"
 services:
     app:
         image: php:7.1-fpm-alpine
+        volumes:
+              #            - ./php/www.conf:/usr/local/etc/php-fpm.d/www.conf
+            - ./php/xdebug_section.ini:/usr/local/etc/php/conf.d/xdebug_section.ini

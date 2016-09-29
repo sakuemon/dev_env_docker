@@ -1,0 +1,6 @@
+version: "2"
+services:
+    log_collector:
+        image: fluent/fluentd
+        ports:
+            - "24224:24224"

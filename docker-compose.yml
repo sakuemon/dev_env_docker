@@ -7,8 +7,15 @@ services:
         container_name: web
         links:
             - app
+            - log_collector
+        logging:
+            driver: "fluentd"
+            options:
+                fluentd-address: "localhost:24224"
+                tag: "web.{{.FullID}}"
         depends_on:
             - app
+            - log_collector
               #    db:
               #        extends:
               #            file: ./db/mysql.yml
@@ -23,8 +30,16 @@ services:
             file: ./app/php.yml
             service: app
         container_name: app
-        #        links:
+        links:
+            - log_collector
         #     - db
+    log_collector:
+        extends:
+            file: ./log_collector/fluentd.yml
+            service: log_collector
+        container_name: log_collector
+        volumes:
+            - ./logs:/fluentd/log
 volumes:
     db:
         driver: 'local'
