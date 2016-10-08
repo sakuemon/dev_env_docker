@@ -4,3 +4,6 @@ services:
         image: fluent/fluentd
         ports:
             - "24224:24224"
+        volumes:
+            - ./:/fluentd/etc
+

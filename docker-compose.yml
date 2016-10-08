@@ -1,4 +1,9 @@
 version: "2"
+
+volumes:
+    db:
+        driver: 'local'
+
 services:
     web:
         extends:
@@ -12,10 +17,11 @@ services:
             driver: "fluentd"
             options:
                 fluentd-address: "localhost:24224"
-                tag: "web.{{.FullID}}"
+                tag: "web"
         depends_on:
             - app
             - log_collector
+
               #    db:
               #        extends:
               #            file: ./db/mysql.yml
@@ -25,6 +31,7 @@ services:
               #            MYSQL_ROOT_PASSWORD: password
               #            MYSQL_USER: s_user
               #            MYSQL_PASSEORD: password
+
     app:
         extends:
             file: ./app/php.yml
@@ -33,6 +40,11 @@ services:
         links:
             - log_collector
         #     - db
+        logging:
+            driver: "fluentd"
+            options:
+                fluentd-address: "localhost:24224"
+                tag: "app"
     log_collector:
         extends:
             file: ./log_collector/fluentd.yml
@@ -40,6 +52,3 @@ services:
         container_name: log_collector
         volumes:
             - ./logs:/fluentd/log
-volumes:
-    db:
-        driver: 'local'
