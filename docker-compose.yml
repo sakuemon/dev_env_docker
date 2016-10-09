@@ -22,15 +22,15 @@ services:
             - app
             - log_collector
 
-              #    db:
-              #        extends:
-              #            file: ./db/mysql.yml
-              #            service: db
-              #        container_name: db
-              #        environment:
-              #            MYSQL_ROOT_PASSWORD: password
-              #            MYSQL_USER: s_user
-              #            MYSQL_PASSEORD: password
+    db:
+        extends:
+            file: ./db/mysql.yml
+            service: db
+        container_name: db
+        environment:
+            MYSQL_ROOT_PASSWORD: password
+            MYSQL_USER: s_user
+            MYSQL_PASSEORD: password
 
     app:
         extends:
@@ -39,7 +39,7 @@ services:
         container_name: app
         links:
             - log_collector
-        #     - db
+            - db
         logging:
             driver: "fluentd"
             options:

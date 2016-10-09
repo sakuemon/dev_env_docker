@@ -3,4 +3,5 @@ services:
     db:
         image: mysql
         volumes:
+            - ./mysql/custom.cnf:/etc/mysql/conf.d/my.cnf
             - db:/var/lib/mysql
