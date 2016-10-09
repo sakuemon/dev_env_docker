@@ -5,8 +5,9 @@ RUN echo "@testing http://nl.alpinelinux.org/alpine/edge/testing" >> /etc/apk/re
     echo "@community http://nl.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
     apk --update add \
         php7-xdebug@testing \
+        php7-intl@community \
     && rm -rf /var/cache/apk/* \
-    && cp /usr/lib/php7/modules/xdebug.so /usr/local/lib/php/extensions/no-debug-non-zts-20151012/xdebug.so
+    && cp /usr/lib/php7/modules/* /usr/local/lib/php/extensions/no-debug-non-zts-20151012/ \
 
 #RUN pecl install xdebug
 

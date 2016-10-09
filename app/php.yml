@@ -5,4 +5,5 @@ services:
         volumes:
               #            - ./php/www.conf:/usr/local/etc/php-fpm.d/www.conf
             - ./php/xdebug_section.ini:/usr/local/etc/php/conf.d/xdebug_section.ini
+            - ./php/intl.ini:/usr/local/etc/php/conf.d/intl.ini
             - ./php/:/var/www/html
